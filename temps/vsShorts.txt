@@ -1,0 +1,14 @@
+
+https://stackoverflow.com/questions/52726849/how-to-transfer-vscode-key-mapping-on-windows-to-ubuntu
+
+w or u ( source ) {
+    - ctrl + shift + p
+    - Open Default Keyboard Shortcuts (JSON)
+    - copy to a new json file
+}
+
+w or u ( target ) {
+    - CTRL + K CTRL + S
+    - Open Keyboard Shortcuts (JSON)
+    - paste source copys
+}

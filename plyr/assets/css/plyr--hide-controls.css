@@ -1,0 +1,6 @@
+
+
+.plyr--hide-controls .plyr__controls, .plyr__progress, .plyr__time {
+  opacity: 0;
+  pointer-events: none;
+}

@@ -1,0 +1,85 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>plyr testes</title>
+
+    <!-- [ fonts ] ================================================ -->
+    <!-- [ favicons ] ================================================ -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- [ PLYR CSS ] ================================================ --> <!---
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />  PLYR CDN --->
+    <link rel="stylesheet" href="assets/Plyr/plyr.css" /> <!-- PLYR LOCAL CSS -->
+    <link rel="stylesheet" href="assets/css/plyr-controls.css" /> 
+    <link rel="stylesheet" href="assets/css/css-testes.css">
+    <!-- <link rel="stylesheet" href="assets/css/plyr--hide-controls.css"> -->
+
+    
+</head>
+<body>
+
+<scaffold>
+    <header>
+        <flexh>
+            <home>
+                <flexh>
+                    <h1>Plyr</h1>
+                </flexh>
+            </home>
+        </flexh>
+    </header>
+    <flexh>
+        <!-- <home>
+            <div class="players" id="player" data-plyr-provider="vimeo" data-plyr-embed-id="450707747" poster="assets/img/STCover.jpg"></div>
+        </home> -->
+        <player-placeholder>
+            <!-- <div class="players" id="player" data-plyr-provider="vimeo" data-plyr-embed-id="450707747" poster="assets/img/STCover.jpg"></div> -->
+            <div 
+                class="player" 
+                id="player" 
+                data-plyr-provider="youtube" 
+                data-plyr-embed-id="ra8dwFFcumU" 
+                poster="assets/img/STCover.jpg">
+            </div>
+            <tela-quente>
+                <button
+                    type="button" 
+                    class="plyr__control plyr__control--overlaid" 
+                    data-plyr="play" 
+                    aria-label="Play">
+                    <svg 
+                        aria-hidden="true" 
+                        focusable="false">
+                        <use xlink:href="#plyr-play"></use>
+                    </svg>
+                    <span class="plyr__sr-only">Play</span>
+                </button>
+            </tela-quente>
+        </player-placeholder>
+    </flexh>
+    <!-- <flexh>
+        <home>
+            <video class="players" id="player" playsinline controls="play-large:0;" data-poster="assets/img/STCover.jpg">
+                <source src="assets/video/Love The Way You Lie.mp4" type="video/mp4" />
+                <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default />
+            </video>
+        </home>
+    </flexh> -->
+</scaffold>
+
+    
+
+    <!-- [ scripts ] ================================================ --> <!---
+    <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>  PLYR CDN --->
+    <script src="assets/Plyr/plyr-testes.js"></script> <!-- PLYR LOCAL -->
+    <script src="assets/scripts/plyrControls.js"></script> <!-- PLYR PLAYERS -->
+    <script>
+        // const player = new Plyr('.player');
+    </script>
+    <script src="assets/scripts/script.js"></script>
+    
+</body>
+</html>

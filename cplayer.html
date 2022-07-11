@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>cplayer</title>
+
+    <!-- [ fonts ] ================================================ -->
+    <!-- [ favicons ] ================================================ -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- [ css ] ================================================ -->
+    <link rel="stylesheet" href="plyr/assets/Plyr/plyr.css" /> <!-- PLYR LOCAL CSS -->
+    <link rel="stylesheet" href="plyr/assets/css/plyr-controls.css" /> 
+    <link rel="stylesheet" href="assets/css/css.css">
+    <style>
+        :root {
+            --controlbar-color: #ccc;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { height: 100%; }
+        body {
+            height: 100%;
+            background: #15161c;
+        }
+        scaffold {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            /* background: #00f; */
+        }
+        home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+        }
+        videoHolder {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            background: rgb( 0 0 0 /.7 );
+            box-shadow: #000 0 0 10px;
+        }
+
+        controlBar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: clamp( 23px, 3vw, 32px);
+            margin-top: calc( 2px );
+            /* background: #000; */
+        }
+
+        controlBar-e, controlBar-d {
+            width: 5%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fa1e4e;
+            user-select: none;
+        }
+        switchControlBar, #switchVideo {
+            cursor: pointer;
+        }
+
+        controlBar-c { 
+            width: 90%;
+            height: 100%; 
+            display: flex;
+            justify-content: center;
+            user-select: none;
+            font-size: 2rem;
+            color: #fa1e4e;
+        }
+
+        controlBar-c svg {
+            max-width: 36px;
+            cursor: pointer;
+        }
+        
+        vtag {
+            display: block;
+            width: 80%;
+        }
+
+        @keyframes fadeOut {
+            0%   { opacity: 1; }
+            95%  { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .fadeout { animation: fadeOut 1s linear; }
+
+        input, ul, a {
+            position: absolute;
+            z-index: 3;
+            transition: opacity 0.15s ease-out;
+        }
+        
+        .opacity {
+            opacity: 0;
+        }
+
+        input:hover, ul:hover, a:hover { opacity: 1; }
+
+        input[type=file] { display: none; }
+
+        a {
+            display: block;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: white;
+            left: 0;
+            top: 0;
+            padding: 2em;
+            font-size: 1.5em;
+        }
+
+        input[type=text] {
+            bottom: 1.5em;
+            left: 1em;
+            font-size: 1.5em;
+            width: 4em;
+            text-align: center;
+            border: 1em solid rgba(0, 0, 0, 0.7);
+        }
+
+        ul {
+            margin: 0;
+            padding: 0 0 0 1em;
+            top: 0;
+            right: 0;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            list-style: none;
+        }
+
+        li {
+            margin: 0.5em;
+            cursor: pointer;
+        }
+        li.played {
+            text-decoration: line-through;
+            list-style: square;
+        }
+        @media only screen and ( max-width: 550px ) {
+            vtag {
+                width: 100%;
+            }
+        }
+    </style>
+    <!-- [ GTag ] ================================================ -->
+    <!-- [ FBPixel ] ================================================ -->
+</head>
+<body>
+
+    <scaffold>
+        <home>
+            <videoHolder>
+                <vtag id="vtag">
+                    <input class="opacity" type="file" multiple>
+                    <a class='fadeout opacity' href="#">Open Files</a>
+                    <!-- <input class='fadeout' type="text" placeholder="playback speed" value="1"> -->
+                    <ul class="opacity"></ul>
+                    <br>
+                    <video class="players" id="player" playsinline controls="play-large:0;" data-poster="/assets/img/STCover.jpg">
+                        <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default />
+                    </video>
+                </vtag>
+            </videoHolder>
+                <controlBar>
+                    <controlBar-e>
+                        <switchControlBar onclick="switchControlBar();">&#9964;</switchControlBar>
+                    </controlBar-e>
+                    <controlBar-c id="controlBar">
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-loop" d="m 13,13 h 10 v 3 l 4,-4 -4,-4 v 3 H 11 v 6 h 2 z M 23,23 H 13 v -3 l -4,4 4,4 v -3 h 12 v -6 h -2 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-volume-booster" d="M 8.5 9 C 6.195898 11.304103 4.7695312 14.486564 4.7695312 18 C 4.7695312 21.513437 6.195898 24.695899 8.5 27 L 9.8496094 25.650391 C 7.8892134 23.689995 6.6796875 20.978784 6.6796875 18 C 6.6796875 15.021216 7.8892134 12.310004 9.8496094 10.349609 L 8.5 9 z M 27.5 9 L 26.150391 10.349609 C 28.110787 12.310004 29.320313 15.021216 29.320312 18 C 29.320312 20.978784 28.110787 23.689995 26.150391 25.650391 L 27.5 27 C 29.804102 24.695899 31.230469 21.513437 31.230469 18 C 31.230469 14.486564 29.804102 11.304103 27.5 9 z M 18.800781 10 L 14 19.599609 L 17.199219 19.599609 L 17.199219 26 L 22 16.400391 L 18.800781 16.400391 L 18.800781 10 z M 11.699219 11.699219 C 10.082529 13.31591 9.0898437 15.54314 9.0898438 18 C 9.0898438 20.45686 10.082529 22.684091 11.699219 24.300781 L 13.048828 22.951172 C 11.775844 21.678187 10.998047 19.934936 10.998047 18 C 10.998047 16.065064 11.788574 14.321814 13.048828 13.048828 L 11.699219 11.699219 z M 24.300781 11.699219 L 22.951172 13.048828 C 24.211427 14.321814 25.001953 16.065064 25.001953 18 C 25.001953 19.934936 24.211427 21.678187 22.951172 22.951172 L 24.300781 24.300781 C 25.917473 22.684091 26.910156 20.45686 26.910156 18 C 26.910156 15.54314 25.917473 13.31591 24.300781 11.699219 z M 18.384766 11.726562 L 18.384766 16.853516 L 21.298828 16.853516 L 17.615234 24.273438 L 17.615234 19.146484 L 14.755859 19.146484 L 18.384766 11.726562 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-whitelist" d="m 27.56842,14.925603 -6.879695,-0.593242 -2.688726,-6.334295 -2.688726,6.343863 -6.8796947,0.583674 5.2243577,4.525863 -1.569221,6.7266 5.913284,-3.569021 5.913284,3.569021 -1.559652,-6.7266 z m -9.568421,5.894147 -3.597726,2.172032 0.956842,-4.095284 -3.176716,-2.755706 4.190968,-0.3636 1.626632,-3.856073 1.6362,3.865642 4.190969,0.3636 -3.176716,2.755705 0.956842,4.095284 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-not-interested" d="M 16.180125,26.178066 V 23.905807 H 6.8638711 V 10.272258 H 27.314195 v 2.850303 h 2.272258 V 8.0000001 H 4.5916129 V 26.178066 Z M 25.05636,15.295943 c -3.506321,0 -6.35203,2.845709 -6.35203,6.352029 0,3.506319 2.845709,6.352027 6.35203,6.352027 3.506319,0 6.352026,-2.845708 6.352026,-6.352027 0,-3.50632 -2.845707,-6.352029 -6.352026,-6.352029 z m -5.081625,6.352029 c 0,-2.807597 2.274028,-5.081624 5.081625,-5.081624 1.175123,0 2.254969,0.400178 3.112495,1.073493 l -7.120625,7.120625 c -0.673316,-0.857524 -1.073494,-1.937369 -1.073495,-3.112494 z m 5.081625,5.081621 c -1.175126,0 -2.254972,-0.400176 -3.112496,-1.07349 l 7.120627,-7.120627 c 0.673313,0.857524 1.07349,1.93737 1.07349,3.112496 0,2.807597 -2.274026,5.081621 -5.081621,5.081621 z M 19.063879,15.034555 q 0,-0.244758 -0.17277,-0.374336 -0.17277,-0.132457 -0.621973,-0.276432 -0.449202,-0.146855 -0.711237,-0.28795 -0.714117,-0.385854 -0.714117,-1.039501 0,-0.339782 0.190046,-0.604696 0.192928,-0.267794 0.549986,-0.417528 0.359938,-0.149734 0.806261,-0.149734 0.449203,0 0.800503,0.164131 0.351298,0.161253 0.544226,0.457841 0.195806,0.29659 0.195806,0.673805 h -0.863851 q 0,-0.287951 -0.181409,-0.446324 -0.181408,-0.161252 -0.509672,-0.161252 -0.316746,0 -0.492395,0.135337 -0.17565,0.132457 -0.17565,0.351299 0,0.204445 0.204445,0.342661 0.207324,0.138216 0.607575,0.259155 0.737153,0.221723 1.074055,0.549986 0.336902,0.328263 0.336902,0.817779 0,0.544226 -0.411769,0.855213 -0.411769,0.308107 -1.108609,0.308107 -0.483757,0 -0.881128,-0.17565 -0.397372,-0.178529 -0.607576,-0.486637 -0.207324,-0.308107 -0.207324,-0.714117 h 0.86673 q 0,0.693961 0.829298,0.693961 0.308107,0 0.480877,-0.123818 0.17277,-0.126699 0.17277,-0.3513 z m -6.208675,1.09997 v -4.192558 h 1.290018 q 0.552865,0 0.98767,0.250518 0.437684,0.247636 0.682442,0.708357 0.244758,0.457842 0.244758,1.042381 v 0.192927 q 0,0.584539 -0.241878,1.0395 -0.238999,0.454963 -0.676683,0.705479 -0.437686,0.250517 -0.98767,0.253396 z m 0.863851,-3.492838 v 2.798878 h 0.417529 q 0.506792,0 0.774586,-0.331143 0.267794,-0.331143 0.273553,-0.947357 v -0.221721 q 0,-0.63925 -0.264915,-0.967514 -0.264913,-0.331143 -0.774586,-0.331143 z m -2.87072,2.628987 H 9.3337166 L 9.0457662,16.134525 H 8.1272044 l 1.5606912,-4.192558 h 0.8005014 l 1.56933,4.192558 h -0.918562 z m -1.2813786,-0.69972 h 1.0481386 l -0.526949,-1.569329 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-cards-end-screens" d="m 23.585753,15.31167 c -4.224201,0 -7.831669,2.627453 -9.293243,6.336303 1.461574,3.708847 5.069042,6.3363 9.293243,6.3363 4.224201,0 7.831669,-2.627453 9.293242,-6.3363 -1.461573,-3.70885 -5.069041,-6.336303 -9.293242,-6.336303 z m 0,10.560503 c -2.331759,0 -4.224201,-1.892442 -4.224201,-4.2242 0,-2.331759 1.892442,-4.224202 4.224201,-4.224202 2.331758,0 4.224201,1.892443 4.224201,4.224202 0,2.331758 -1.892443,4.2242 -4.224201,4.2242 z m 0,-6.758721 c -1.402435,0 -2.534521,1.132087 -2.534521,2.534521 0,1.402434 1.132086,2.53452 2.534521,2.53452 1.402434,0 2.53452,-1.132086 2.53452,-2.53452 0,-1.402434 -1.132086,-2.534521 -2.53452,-2.534521 z M 7.5464614,12.108004 h 8.9170356 v 3.889561 H 7.5464614 Z M 12.520348,23.921535 H 5.3932636 V 10.287985 H 25.843588 v 2.855964 h 2.272258 V 8.0157271 H 3.1210054 V 26.193793 h 9.3993426 z m -0.66097,-3.803731 a 2.1564575,2.1564575 0 0 1 -2.1564585,2.156458 2.1564575,2.1564575 0 0 1 -2.1564581,-2.156458 2.1564575,2.1564575 0 0 1 2.1564581,-2.156458 2.1564575,2.1564575 0 0 1 2.1564585,2.156458 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-cinema-mode" d="m 8,8.1430084 c -1.375,0 -2.4882814,1.125 -2.4882812,2.4999996 L 5.5,23.679025 c 0,1.375 1.125,2.5 2.4999999,2.5 H 28 c 1.375,0 2.5,-1.125 2.5,-2.5 V 7.9999999 h -5 L 28,11.75 h -3.75 l -2.5,-3.7500001 h -2.5 L 21.75,11.75 H 18 L 15.5,7.9999999 H 13 L 15.5,11.75 H 11.75 L 9.2500001,8.1430084 Z M 7.7714843,14.017578 H 28.207031 v 9.856759 H 7.7714843 Z" fill="var(--controlbar-color)"></path></svg>
+                        <svg id="switchVideo" onclick="switchVideo();" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-size" d="M 5.390625,7.9999999 V 26.179687 h 25.21875 V 7.9999999 Z M 7.410156,10.009766 H 28.589844 V 24.169922 H 7.410156 Z m 4.040294,4.050342 h 3.029835 V 12.040219 H 9.430562 v 5.049722 h 2.019888 z m 15.118897,3.029833 h -2.019888 v 3.029834 h -3.029834 v 2.019889 h 5.049722 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-pop-up-player" d="m 21.554375,7.9999999 h 2.02 V 10.02 h -2.02 z m 4.04,0 h 2.02 V 10.02 h -2.02 z M 5.394375,16.08 h 2.02 v 2.02 h -2.02 z m 0,-4.04 h 2.02 v 2.02 h -2.02 z m 0,8.08 h 2.02 v 2.02 h -2.02 z m 12.12,-12.1200001 h 2.02 V 10.02 h -2.02 z M 30.605625,26.18 H 9.434375 V 12.04 h 21.17125 z m -2.02,-12.12 h -17.13125 v 10.1 h 17.13125 z M 13.474375,7.9999999 h 2.02 V 10.02 h -2.02 z m -4.04,0 h 2.02 V 10.02 h -2.02 z m -4.04,0 h 2.02 V 10.02 h -2.02 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-speed" d="m 27.526463,13.161756 -1.400912,2.107062 a 9.1116182,9.1116182 0 0 1 -0.250569,8.633258 H 10.089103 A 9.1116182,9.1116182 0 0 1 22.059491,11.202758 L 24.166553,9.8018471 A 11.389523,11.389523 0 0 0 8.1301049,25.041029 2.2779046,2.2779046 0 0 0 10.089103,26.179981 H 25.863592 A 2.2779046,2.2779046 0 0 0 27.845369,25.041029 11.389523,11.389523 0 0 0 27.537852,13.150367 Z M 16.376119,20.95219 a 2.2779046,2.2779046 0 0 0 3.223235,0 l 6.446471,-9.669705 -9.669706,6.44647 a 2.2779046,2.2779046 0 0 0 0,3.223235 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-video-filters" d="m 22.899051,15.920251 -1.037187,2.272983 -1.037186,-2.272983 -2.272983,-1.037187 2.272983,-1.037186 1.037186,-2.272983 1.037187,2.272983 2.272983,1.037186 z m -6.278288,3.65222 -1.379238,3.034322 -1.379237,-3.034322 -3.034322,-1.379237 3.034322,-1.379237 1.379237,-3.034323 1.379238,3.034323 3.034322,1.379237 z M 5.390625,8 v 18.179688 h 25.21875 V 8 Z m 2.0195312,2.009766 H 28.589844 V 24.169922 H 7.4101562 Z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-flip-horizontally" d="m 21.034058,26.204349 h 2.022705 v -2.022705 h -2.022705 z m 4.04541,-12.136233 h 2.022707 V 12.045411 H 25.079468 Z M 8.897825,8 v 18.204349 h 6.068116 V 24.181644 H 10.92053 V 10.022706 h 4.045411 V 8 Z m 16.181643,0 v 2.022706 h 2.022707 V 8 Z m -8.090821,20.227054 h 2.022706 V 5.9772944 h -2.022706 z m 8.090821,-6.068116 h 2.022707 v -2.022706 h -2.022707 z m -4.04541,-12.136232 h 2.022705 V 8 h -2.022705 z m 4.04541,8.090822 h 2.022707 v -2.022706 h -2.022707 z m 0,8.090821 h 2.022707 v -2.022705 h -2.022707 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-screenshot" d="M 26.079999,10.02 H 22.878298 L 21.029999,8 h -6.06 l -1.8483,2.02 H 9.9200015 c -1.111,0 -2.02,0.909 -2.02,2.02 v 12.12 c 0,1.111 0.909,2.02 2.02,2.02 H 26.079999 c 1.111,0 2.019999,-0.909 2.019999,-2.02 V 12.04 c 0,-1.111 -0.909,-2.02 -2.019999,-2.02 z m 0,14.14 H 9.9200015 V 12.04 h 4.0904965 l 1.8483,-2.02 h 4.2824 l 1.8483,2.02 h 4.0905 z m -8.08,-11.11 c -2.7876,0 -5.05,2.2624 -5.05,5.05 0,2.7876 2.2624,5.05 5.05,5.05 2.7876,0 5.049999,-2.2624 5.049999,-5.05 0,-2.7876 -2.262399,-5.05 -5.049999,-5.05 z m 0,8.08 c -1.6665,0 -3.03,-1.3635 -3.03,-3.03 0,-1.6665 1.3635,-3.03 3.03,-3.03 1.6665,0 3.03,1.3635 3.03,3.03 0,1.6665 -1.3635,3.03 -3.03,3.03 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-keyboard-shortcuts" d="m 24.492861,11.895714 h 2.597142 v 2.597143 h -2.597142 z m 0,3.895714 h 2.597142 v 2.597144 h -2.597142 z m -3.895714,-3.895714 h 2.597143 v 2.597143 h -2.597143 z m 0,3.895714 h 2.597143 v 2.597144 h -2.597143 z m -7.791429,3.895715 H 23.19429 v 2.597143 H 12.805718 Z M 8.9100043,11.895714 h 2.5971427 v 2.597143 H 8.9100043 Z m 0,3.895714 h 2.5971427 v 2.597144 H 8.9100043 Z m 3.8957137,0 h 2.597143 v 2.597144 h -2.597143 z m 0,-3.895714 h 2.597143 v 2.597143 h -2.597143 z m 3.895715,3.895714 h 2.597142 v 2.597144 h -2.597142 z m 0,-3.895714 h 2.597142 v 2.597143 H 16.701433 Z M 7.6113281,8 C 6.1828991,8 5.0273437,9.1692275 5.0273438,10.597656 l -0.013672,12.984375 c 0,1.428429 1.1692272,2.597657 2.5976562,2.597657 H 28.388672 c 1.428429,0 2.597656,-1.169228 2.597656,-2.597657 V 10.597656 C 30.986328,9.1692274 29.817101,8 28.388672,8 Z M 8.7617188,9.8496094 H 27.238281 c 1.27016,0 2.308594,0.9307206 2.308594,2.0683596 v 10.341797 c 0,1.13764 -1.038434,2.068359 -2.308594,2.068359 H 8.7617188 c -1.2701601,0 -2.3085938,-0.930719 -2.3085938,-2.068359 l 0.011719,-10.341797 c -10e-8,-1.137639 1.026715,-2.0683596 2.296875,-2.0683596 z" fill="var(--controlbar-color)"></path></svg>
+                        <svg onclick=";" version="1.1" viewBox="0 0 36 36" height="100%" width="100%"><path id="efyt-options" d="m 17.215778,7.9998438 -0.121201,1.8617668 a 7.2941366,7.2941366 0 0 0 -2.61169,0.8471364 l -1.19138,-1.433778 -0.19737,0.143504 -0.437247,0.3173086 -0.436823,0.3177284 -0.197372,0.143504 0.993587,1.573917 a 7.2941366,7.2941366 0 0 0 -1.611792,2.223684 l -1.8070586,-0.459551 -0.075748,0.231879 -0.1666512,0.513838 -0.1670707,0.513838 -0.075329,0.232299 1.7271025,0.688064 a 7.2941366,7.2941366 0 0 0 -0.133827,1.374862 7.2941366,7.2941366 0 0 0 0.136352,1.374021 l -1.7296275,0.689325 0.075329,0.231879 0.1670707,0.513837 0.1666512,0.513838 0.075748,0.231877 1.8066396,-0.459549 a 7.2941366,7.2941366 0 0 0 1.614314,2.220318 l -0.99569,1.577282 0.197372,0.143505 0.436823,0.31773 0.437247,0.317306 0.19737,0.143506 1.187172,-1.42831 a 7.2941366,7.2941366 0 0 0 2.615898,0.844193 l 0.121201,1.859242 h 0.244084 0.53993 0.540349 0.244083 l 0.1212,-1.861768 a 7.2941366,7.2941366 0 0 0 2.611271,-0.847137 l 1.1918,1.43378 0.197372,-0.143506 0.437244,-0.317306 0.436827,-0.31773 0.19737,-0.143505 -0.993589,-1.573917 a 7.2941366,7.2941366 0 0 0 1.611792,-2.223683 l 1.807059,0.459549 0.07575,-0.231878 0.166648,-0.513837 0.16707,-0.513838 0.07533,-0.231879 -1.727521,-0.688483 a 7.2941366,7.2941366 0 0 0 0.134246,-1.374863 7.2941366,7.2941366 0 0 0 -0.13635,-1.37402 l 1.729625,-0.688905 -0.07533,-0.232299 -0.16707,-0.513838 -0.166648,-0.513838 -0.07575,-0.231879 -1.806636,0.459551 A 7.2941366,7.2941366 0 0 0 22.981616,11.774298 L 23.977308,10.197014 23.779938,10.05351 23.343111,9.7357816 22.905867,9.418473 22.708495,9.274969 21.521325,10.703277 A 7.2941366,7.2941366 0 0 0 18.905424,9.8590851 l -0.1212,-1.8592413 h -0.244083 -0.540349 -0.53993 z m 0.784434,3.9903412 a 5.0996903,5.0996903 0 0 1 5.099659,5.099659 5.0996903,5.0996903 0 0 1 -5.099659,5.09966 5.0996903,5.0996903 0 0 1 -5.100078,-5.09966 5.0996903,5.0996903 0 0 1 5.100078,-5.099659 z m 0,1.292801 a 3.8068902,3.8068902 0 0 0 -3.807279,3.806858 3.8068902,3.8068902 0 0 0 3.807279,3.80686 3.8068902,3.8068902 0 0 0 3.806859,-3.80686 3.8068902,3.8068902 0 0 0 -3.806859,-3.806858 z m 0,0.804632 a 3.0021577,3.0021577 0 0 1 3.001804,3.002226 3.0021577,3.0021577 0 0 1 -3.001804,3.002225 3.0021577,3.0021577 0 0 1 -3.002226,-3.002225 3.0021577,3.0021577 0 0 1 3.002226,-3.002226 z" fill="var(--controlbar-color)"></path></svg>
+                    </controlBar-c>
+                    <controlBar-d></controlBar-d>
+                </controlBar>
+            </controlBar>
+        </home>
+    </scaffold>
+    
+    
+    
+    
+    <scripts>
+        <script src="plyr/assets/Plyr/plyr.js"></script> <!-- PLYR LOCAL -->
+        <script src="plyr/assets/scripts/plyrControls.js"></script> <!-- PLYR players -->
+        <!-- local player -->
+        <script>
+            // get DOM elements
+            const video = document.querySelector('video');
+            const filesInput = document.querySelector('input[type=file]');
+            const speedInput = document.querySelector('input[type=text]');
+            const filesButton = document.querySelector('a');
+            const playlist = document.querySelector('ul');
+        
+            // redirect filesButton click to hidden filesInput
+            filesButton.addEventListener('click', e => {
+                filesInput.click();
+                e.preventDefault();
+                return false;
+            });
+        
+            filesInput.addEventListener('change', function (e) {
+                // delete all current list items in playlist
+                playlist.innerHTML = '';
+        
+                // go through all selected files
+                for (const file of Array.from(this.files)) {
+        
+                    // create list item and object url for the video file
+                    const listItem = document.createElement('li');
+                    listItem.objUrl = URL.createObjectURL(file);
+                    listItem.textContent = file.name;
+        
+                    // give list item a click event listener for the corresponding video
+                    listItem.addEventListener('click', function (e) {
+                        this.classList.add('played');
+                        video.src = this.objUrl;
+                        video.playbackRate = Number(speedInput.value);
+                    });
+        
+                    // append li to the list
+                    playlist.appendChild(listItem);
+                };
+        
+                // show the playlist for a moment
+                playlist.classList.add('fadeout');
+            }, false /* don't capture */);
+        
+            // remove playlist fadeout after the animation ends, so it can be retriggered
+            playlist.addEventListener('animationend', e => {
+                playlist.classList.remove('fadeout');
+            });
+        
+            // handle changes to speed input
+            speedInput.addEventListener('change', e => {
+                video.playbackRate = Number(speedInput.value);
+                // write actual playback rate value back to input
+                speedInput.value = Number(video.playbackRate);
+            });
+        
+            // add keyboard shortcuts for pause (space) and 5 sec jump (left/right arrow)
+            document.addEventListener('keydown', e => {
+                // console.log(e.keyCode);
+                switch (e.keyCode) {
+                    case 32: // space
+                        video.paused ? video.play() : video.pause();
+                        break;
+                    case 37: // left arrow
+                        video.currentTime += -5;
+                        break;
+                    case 39: // right arrow
+                        video.currentTime += 5;
+                        break;
+                }
+            });
+        </script>
+        <script>
+            // controlBar
+            var controlBar = true;
+            function switchControlBar() {
+                if( !controlBar ) {
+                    document.getElementById( "controlBar" ).style.visibility = "visible";
+                    controlBar = true;
+                } else if( controlBar ) {
+                    document.getElementById( "controlBar" ).style.visibility = "hidden";
+                    controlBar = false;
+                }
+            }
+
+            // videoHolder width
+            var switchVideoWidth = "80%";
+            function switchVideo() {
+                if( switchVideoWidth === "80%" ) {
+                    document.getElementById( "vtag" ).style.width = "90%";
+                    switchVideoWidth = "90%";
+                }else if( switchVideoWidth === "90%" ) {
+                    document.getElementById( "vtag" ).style.width = "95%";
+                    switchVideoWidth = "95%";
+                }else if( switchVideoWidth === "95%" ) {
+                    document.getElementById( "vtag" ).style.width = "100%";
+                    switchVideoWidth = "100%";
+                }else if( switchVideoWidth === "100%" ) {
+                    document.getElementById( "vtag" ).style.width = "80%";
+                    switchVideoWidth = "80%";
+                }
+            }
+        </script>
+    </scripts>
+    
+</body>
+</html>

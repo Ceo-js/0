@@ -1,0 +1,110 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<title>Html</title>
+
+		<!-- [ fonts ] =================================================== -->
+		<!-- [ favicons ] ================================================ -->
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- [ css ] ===================================================== -->
+		<link rel="stylesheet" href="assets/css/css.css">
+		<!-- [ GTag ] ==================================================== -->
+		<!-- [ FBPixel ] ================================================= -->
+	</head>
+	<body>
+		<div class="col-md-12 col-xl-4 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">To do list</h4>
+					<div class="add-items d-flex">
+						<input type="text" class="form-control todo-list-input" placeholder="enter task..">
+						<button class="add btn btn-primary todo-list-add-btn">Add</button>
+					</div>
+					<div class="list-wrapper">
+						<ul class="d-flex flex-column-reverse text-white todo-list todo-list-custom">
+							<li>
+								<div class="form-check form-check-primary">
+									<label class="form-check-label">
+										<input class="checkbox" type="checkbox"> Create invoice </label>
+								</div>
+								<i class="remove mdi mdi-close-box"></i>
+							</li>
+							<li>
+								<div class="form-check form-check-primary">
+									<label class="form-check-label">
+										<input class="checkbox" type="checkbox"> Meeting with Alita </label>
+								</div>
+								<i class="remove mdi mdi-close-box"></i>
+							</li>
+							<li class="completed">
+								<div class="form-check form-check-primary">
+									<label class="form-check-label">
+										<input class="checkbox" type="checkbox" checked> Prepare for presentation </label>
+								</div>
+								<i class="remove mdi mdi-close-box"></i>
+							</li>
+							<li>
+								<div class="form-check form-check-primary">
+									<label class="form-check-label">
+										<input class="checkbox" type="checkbox"> Plan weekend outing </label>
+								</div>
+								<i class="remove mdi mdi-close-box"></i>
+							</li>
+							<li>
+								<div class="form-check form-check-primary">
+									<label class="form-check-label">
+										<input class="checkbox" type="checkbox"> Pick up kids from school </label>
+								</div>
+								<i class="remove mdi mdi-close-box"></i>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<scripts>
+			<script src="assets/scripts/Javascript"></script>
+			<script>
+				(function($) {
+					'use strict';
+					$(function() {
+						var todoListItem = $('.todo-list');
+						var todoListInput = $('.todo-list-input');
+						$('.todo-list-add-btn').on("click", function(event) {
+							event.preventDefault();
+
+							var item = $(this).prevAll('.todo-list-input').val();
+
+							if (item) {
+								todoListItem.append("<li><div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox'/>" + item + "<i class='input-helper'></i></label></div><i class='remove mdi mdi-close-circle-outline'></i></li>");
+								todoListInput.val("");
+							}
+
+						});
+
+						todoListItem.on('change', '.checkbox', function() {
+							if ($(this).attr('checked')) {
+								$(this).removeAttr('checked');
+							} else {
+								$(this).attr('checked', 'checked');
+							}
+
+							$(this).closest("li").toggleClass('completed');
+
+						});
+
+						todoListItem.on('click', '.remove', function() {
+							$(this).parent().remove();
+						});
+
+					});
+				})(jQuery);
+			</script>
+		</scripts>
+	</body>
+</html>

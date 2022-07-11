@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,800,900&display=swap" rel="stylesheet">
+    <!-- Code by Angela Delise
+     https://codepen.io/angeladelise/pen/YzXLdyq
+        Video Tutorial: https://www.youtube.com/watch?v=68O6eOGAGqA -->
+    <title>Grid</title>
+    <style>
+        :root {
+            --appbar: #15161c;
+            --sidebar: #181a21;
+            --panel: #21222c;
+            --card: #1d1e27;
+            --bg: #282a36;
+            --accent: #0f0fff;
+            --azulc: #1a73e8;
+            --azuld: #125ab8;
+            --vermelho: #ae261e;
+            --main-radius: 1rem;
+            --main-padding: 5px;
+            --box-shadow: 0 0 10px 2px  #000;
+            --card-shadow: 0 3px 5px 2px  rgb( 0 0 0 /.5 );
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: var(--bg);
+            height: 100vh;
+        }
+
+        scaffold {
+            display: grid;
+            height: 100%;
+            /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+            grid-template-columns: 68px 1fr 1fr 1fr;
+            /* grid-template-rows: 0.2fr 1.5fr 1.2fr 0.8fr; */
+            grid-template-rows: 68px 1.5fr 1.2fr 0.8fr;
+            grid-template-areas:
+                "nav nav nav nav"
+                "sidebar-fake main main main"
+                "sidebar-fake card1 card2 card3"
+                "sidebar-fake footer footer footer";
+            grid-gap: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 12px;
+            color: #004d40;
+            text-align: center;
+            background: var(--sidebar);
+        }
+
+        nav {
+            background: var(--appbar);
+            grid-area: nav;
+            /* border-radius: var(--main-radius); */
+            /* padding-top: var(--main-padding); */
+            z-index: 33;
+            box-shadow: var(--box-shadow);
+        }
+
+        main {
+            background: var(--bg);
+            grid-area: main;
+            border-radius: var(--main-radius);
+            padding-top: var(--main-padding);
+            /* box-shadow: var(--box-shadow); */
+            transition: 0.2s ease-in;
+        }
+
+        sidebar-fake {
+            background: var(--sidebar);
+            grid-area: sidebar-fake;
+            border-radius: var(--main-radius);
+            padding-top: var(--main-padding);
+        }
+
+        card1 {
+            background: var(--bg);
+            grid-area: card1;
+            border-radius: var(--main-radius);
+            padding-top: var(--main-padding);
+            transition: 0.2s ease-in;
+        }
+
+        card2 {
+            background: var(--bg);
+            grid-area: card2;
+            border-radius: var(--main-radius);
+            padding-top: var(--main-padding);
+            transition: 0.2s ease-in;
+        }
+
+        card3 {
+            background: var(--bg);
+            grid-area: card3;
+            border-radius: var(--main-radius);
+            padding-top: var(--main-padding);
+            transition: 0.2s ease-in;
+        }
+
+        footer {
+            background: var(--bg);
+            grid-area: footer;
+            border-radius: var(--main-radius);
+            padding-top: var(--main-padding);
+            transition: 0.2s ease-in;
+        }
+
+        a {
+            text-align: center;
+            display: block;
+            font-family: inherit;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem;
+        }
+
+        @media only screen and (max-width: 550px) {
+            scaffold {
+                grid-template-columns: 1fr;
+                /* grid-template-rows: 0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr; */
+                grid-template-rows: 60px 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr;
+                grid-template-areas:
+                                    "nav"
+                                    "sidebar-fake"
+                                    "main"
+                                    "card1"
+                                    "card2"
+                                    "card3"
+                                    "footer";
+            }
+        }
+
+        main:hover, 
+        card1:hover, card2:hover, card3:hover,
+        footer:hover {
+            box-shadow: var(--card-shadow);
+            transition: .2s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+      
+    <scaffold>
+        <nav>Navbar</nav>
+        <main>Main</main>
+        <sidebar-fake id="sidebar-fake">sidebar-fake</sidebar-fake>
+        <card1 id="card1">card1</card1>
+        <card2 id="card2">card2</card2>
+        <card3 id="card3">card3</card3>
+        <footer>Footer</footer>
+      </scaffold>
+    
+</body>
+</html>
