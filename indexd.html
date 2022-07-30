@@ -31,25 +31,6 @@
         }
 
         :root {
-  --ceo-c1: #131418;
-  --ceo-c2: #15161a;
-  --ceo-c3: #16181c; /* 0 */
-  --ceo-c4: #191b1f;
-  --ceo-c5: #1b1d22; /* 1 */
-  --ceo-c6: #1d1f24;
-  --ceo-c7: #1e2025;
-  --ceo-c8: #1f2127;
-  --ceo-c9: #202228;
-  --ceo-d0: #212329; /* 2 */
-  --ceo-d1: #24262c; /* 3 */
-  --ceo-d2: #25272d;
-  --ceo-d3: #282a30; /* 4 */
-  --ceo-d4: #2a2c31;
-  --ceo-d5: #2c2e34;
-  --ceo-d6: #2e3036;
-  --ceo-d7: #313338;
-  --ceo-d8: #32343a;
-  --ceo-d9: #35373c;
             --appbar: #15161c;
             --sidebar: #181a21;
             --panel: #21222c;
@@ -63,7 +44,6 @@
             --azuld: #125ab8;
             --vermelho: #ae261e;
             --search-btn: #e84118;
-            --valColor: #ccc;
 
             /* --icons: rgb(204, 97, 0); */
             /* --icons: #fa1e4e; */
@@ -92,7 +72,8 @@
         html { height: 100%; }
 
         body {
-            background: var(--ceo-d1);
+            background: var(--background);
+            color: #f55;
             height: 100%;
         }
 
@@ -118,7 +99,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--ceo-d6);
+            background: var(--bg);
             border-radius: 24px;
             margin: 8px;
             padding: 5px;
@@ -180,11 +161,6 @@
             background: var(--titulo);
         }
 
-        #geolocationPanel mrgn h3,
-        #geolocationPanel mrgn hl6 {
-            color: var( --valColor );
-        }
-
         search {
             width: 24px;
             height: 24px;
@@ -199,7 +175,7 @@
         search-box{
             display: flex;
             align-items: center;
-            background: var(--ceo-d6);
+            background: var(--bg);
             border-radius: 24px;
             /* margin: 8px; */
             width: 100%;
@@ -216,7 +192,7 @@
             transition: 0.4s;
         }
         search-box:hover > .search-btn{
-        background: var(--ceo-d6);
+        background: var(--card);
         width: 38px;
         height: 38px;
         margin-right: 4px;
@@ -255,7 +231,7 @@
             position: sticky;
             top: 0;
             background-image: linear-gradient(0deg, rgb(174, 21, 57) 0%, rgb(144, 64, 11) 100%);
-            background: var(--ceo-c3);
+            background: var(--appbar);
             box-shadow: #000 0 0 10px;
         }
 
@@ -296,12 +272,10 @@
             height: 100%;
             width: 260px;
             /* background: linear-gradient(45deg, #000, #1f0413, #1f0413); */
-            background: #1b1d2290;
-            backdrop-filter: blur( 12px );
-            -webkit-backdrop-filter: blur( 12px );
+            background: var(--appbar);
             z-index: 100;
             transition: all .5s cubic-bezier(0.68, -0.55, 0, 1.31);
-            box-shadow: #0009 0 0 6px;
+            box-shadow: rgb(0 0 0 /.9) 0 0 10px;
         }
 
         sidebar.close {
@@ -1335,7 +1309,7 @@
                       </center>
                   </card>
                   <card>
-                      <!-- <t>Sammarco</t> -->
+                      <t>Sammarco</t>
                   </card>
                   <card>3</card>
               </flexh>
