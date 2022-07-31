@@ -1,0 +1,6 @@
+
+
+@echo off
+
+code .
+exit
