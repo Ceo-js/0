@@ -50,6 +50,11 @@
   --ceo-d7: #313338;
   --ceo-d8: #32343a;
   --ceo-d9: #35373c;
+  --ceo-0: #002429;
+  --ceo-1: #2d2f35;
+  --ceo-2: #0c3135;
+  --ceo-3: #0f3438;
+  
             --appbar: #15161c;
             --sidebar: #181a21;
             --panel: #21222c;
@@ -118,7 +123,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--ceo-d6);
+            background: var(--ceo-3);
             border-radius: 24px;
             margin: 8px;
             padding: 5px;
@@ -199,7 +204,7 @@
         search-box{
             display: flex;
             align-items: center;
-            background: var(--ceo-d6);
+            background: var(--ceo-3);
             border-radius: 24px;
             /* margin: 8px; */
             width: 100%;
@@ -296,17 +301,20 @@
             height: 100%;
             width: 260px;
             /* background: linear-gradient(45deg, #000, #1f0413, #1f0413); */
-            background: #1b1d2290;
-            backdrop-filter: blur( 12px );
-            -webkit-backdrop-filter: blur( 12px );
+            background: #00242999;
             z-index: 100;
             transition: all .5s cubic-bezier(0.68, -0.55, 0, 1.31);
-            box-shadow: #0009 0 0 6px;
+            box-shadow: #0005 0 0 5px;
         }
 
         sidebar.close {
             width: 68px;
-            /* 78 */
+            background: #002429;
+        }
+
+        .blur {
+            backdrop-filter: blur( 12px );
+            -webkit-backdrop-filter: blur( 12px );
         }
 
         logo-details {
@@ -819,7 +827,7 @@
       </div>		
     </loginScreen>
 
-      <sidebar class="sbar close">
+      <sidebar class="close">
           <logo-details>
               <!-- <i class='bx bx-game  switch'></i> -->
               <i class="switch" id="avatar"><avatar/></i>
@@ -1426,11 +1434,16 @@
                   arrowParent.classList.toggle("showMenu");
               });
           }
-          let sidebar = document.querySelector(".sbar");
+          let sidebar = document.querySelector("sidebar");
           let sidebarBtn = document.querySelector(".switch");
           console.log(sidebarBtn);
           sidebarBtn.addEventListener("click", () => {
               sidebar.classList.toggle("close");
+              if( sidebar.classList.contains( "close" ) ) {
+                  sidebar.classList.remove( "blur" );
+                } else {
+                  sidebar.classList.add( "blur" );
+              }
           });
       </script>
       <script>
@@ -1483,7 +1496,10 @@
 					this.style.cursor = "pointer";
 				} );
 
+                
 			} );
+
+            
 		</script>
       	<script src="assets/scripts/lgn.js"></script>
   <!-- ======================================
