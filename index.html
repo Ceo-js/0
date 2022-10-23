@@ -2,7 +2,6 @@
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
     <title>Ceo</title>
     <meta charset="UTF-8">
@@ -148,19 +147,39 @@
             margin: 8px;
             padding: 5px;
             min-width: 306px;
-            /* max-width: 500px; */
             width: 100%;
             width: clamp(306px, 100%, 100%);
             min-height: 300px;
-            /* box-shadow: #00000030 0 5px 5px; */
             transition: .7s cubic-bezier(0.65, 0.05, 0.36, 1);
-        }
-
-        card:hover {
-            box-shadow: rgb(17 19 19 / 90%) 0px 4px 12px;
+            /* max-width: 500px; */
+            /* box-shadow: #00000030 0 5px 5px; */
+        } card:hover {
+            /* box-shadow: rgb(17 19 19 / 90%) 0px 4px 12px; */
             /* transition: .3s cubic-bezier(0.6, -0.28, 0.74, 0.05); */
             transition: all .2s ease-in-out;
-            transform: translateY(-5px) scale(1.005) translateZ(0);
+            /* transform: translateY(-5px) scale(1.005) translateZ(0); */
+        }
+
+        principal flexh card {
+            background: transparent;
+        } principal flexh card:hover {
+            filter: drop-shadow(#f0a 0 0 5px);
+        }
+        card card-spot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--ceo-3);
+            border-radius: 6px;
+            padding: 5px;
+            min-width: 306px;
+            width: 100%;
+            width: clamp(306px, 100%, 100%);
+            min-height: 300px;
+            transition: .7s cubic-bezier(0.65, 0.05, 0.36, 1);
+            clip-path: polygon(0% 10%, 10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%);
+        } card card-spot:hover {
+            filter: drop-shadow(#fff5 0 0 13px);
         }
 
         .search {
@@ -1622,57 +1641,63 @@
         <principal>
             <flexh>
                 <card>
-                    <!-- [ SHOW IP ]
-                        ============================================ -->
-                    <center id="geolocationPanel">
-                        <mrgn />
-                        <h3>Public IP Address of user is:</h3>
-                        <!-- <h2 id="userip"></h2> -->
-                        <gold>
-                            <h2 id="ip"></h2>
-                        </gold>
+                    <card-spot>
+                        <!-- [ SHOW IP ]
+                            ============================================ -->
+                        <center id="geolocationPanel">
+                            <mrgn />
+                            <h3>Public IP Address of user is:</h3>
+                            <!-- <h2 id="userip"></h2> -->
+                            <gold>
+                                <h2 id="ip"></h2>
+                            </gold>
 
-                        <hl6 id="hostname"></hl6> <br>
-                        <hl6 id="org"></hl6> <br>
+                            <hl6 id="hostname"></hl6> <br>
+                            <hl6 id="org"></hl6> <br>
 
-                        <azul>
-                            <t6>País: </t6>
+                            <azul>
+                                <t6>País: </t6>
+                                <sp />
+                                <hl6 id="country"></hl6> <br>
+                                <t6>Estado: </t6>
+                                <sp /> -
+                                <hl6 id="region"></hl6> <br>
+                                <sp />
+                                <t6>Cidade: </t6>
+                                <sp /> -
+                                <hl6 id="city"></hl6> <br>
+                                <sp />
+                            </azul>
+                            <t6>C.E.P: </t6>
                             <sp />
-                            <hl6 id="country"></hl6> <br>
-                            <t6>Estado: </t6>
-                            <sp /> -
-                            <hl6 id="region"></hl6> <br>
+                            <hl6 id="postal"></hl6> <br>
+                            <hl6 id="loc"></hl6> <br>
+                            <t6>timezone: </t6>
                             <sp />
-                            <t6>Cidade: </t6>
-                            <sp /> -
-                            <hl6 id="city"></hl6> <br>
-                            <sp />
-                        </azul>
-                        <t6>C.E.P: </t6>
-                        <sp />
-                        <hl6 id="postal"></hl6> <br>
-                        <hl6 id="loc"></hl6> <br>
-                        <t6>timezone: </t6>
-                        <sp />
-                        <hl6 id="timezone"></hl6>
-                    </center>
+                            <hl6 id="timezone"></hl6>
+                        </center>
+                    </card-spot>
                 </card>
                 <card>
-                    <!-- <t>Sammarco</t> -->
+                    <card-spot>
+                        <!-- <t>Sammarco</t> -->
+                    </card-spot>
                 </card>
                 <card>
-                    <center>
-                        <form action="">
-                            <h1 id="perfil"></h1>
-                            <input type="text">
-                            <br>
-                            <label for="" id="ipAtual"></label>
-                            <br>
-                            <label id="ipAntigo"></label>
-                            <br>
-                            <label id="ipNovo"></label>
-                        </form>
-                    </center>
+                    <card-spot>
+                        <center>
+                            <form action="">
+                                <h1 id="perfil"></h1>
+                                <input type="text">
+                                <br>
+                                <label for="" id="ipAtual"></label>
+                                <br>
+                                <label id="ipAntigo"></label>
+                                <br>
+                                <label id="ipNovo"></label>
+                            </form>
+                        </center>
+                    </card-spot>
                 </card>
             </flexh>
         </principal>
