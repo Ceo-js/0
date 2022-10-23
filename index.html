@@ -905,7 +905,6 @@
 
     <sidebar class="close">
         <logo-details>
-            <!-- <i class='bx bx-game  switch'></i> -->
             <i class="switch" id="avatar">
                 <avatar />
             </i>
@@ -914,9 +913,7 @@
         </logo-details>
         <ul class="nav-links">
 
-            <!-- [ EMAIL ] 
-                ====================================================== -->
-            <li>
+            <li id="EMAIL-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/gmail-logo-2561.svg" alt="email"></i>
@@ -973,9 +970,7 @@
                 </ul>
             </li>
 
-            <!-- [ FACEBOOK ] 
-                =================================================== -->
-            <li>
+            <li id="FACEBOOK-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/facebook-5221.svg" alt="Facebook"></i>
@@ -1059,9 +1054,7 @@
                 </ul>
             </li>
 
-            <!-- [ Google ] 
-                ===================================================== -->
-            <li>
+            <li id="GOOGLE-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/google-ads-svgrepo-com.svg" alt="Google"></i>
@@ -1113,9 +1106,8 @@
                     </li>
                 </ul>
             </li>
-            <!-- [ TABOOLA ] 
-                ==================================================== -->
-            <li>
+            
+            <li id="TABOOLA-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/smile-svgrepo-com.svg" alt="Taboola"></i>
@@ -1134,9 +1126,8 @@
                     </li>
                 </ul>
             </li>
-            <!-- [ CHROME STORE ] 
-                =============================================== -->
-            <li>
+            
+            <li id="CHROME-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/chrome-dev-svgrepo-com.svg" alt="chrome store"></i>
@@ -1219,9 +1210,8 @@
                     </li>
                 </ul>
             </li>
-            <!-- [ EDIÇÃO ] 
-                ===================================================== -->
-            <li>
+            
+            <li id="EDICAO-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/picture-photo-svgrepo-com.svg" alt="edição"></i>
@@ -1331,9 +1321,7 @@
                 </ul>
             </li>
 
-            <!-- [ HostGator ] 
-                ================================================== -->
-            <li>
+            <li id="HOSTGATOR-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/server-svgrepo-com.svg" alt="servidor"></i>
@@ -1388,10 +1376,8 @@
                     </li>
                 </ul>
             </li>
-
-            <!-- [ VIDEOS ] 
-                ===================================================== -->
-            <li>
+            
+            <li id="VIDEOS-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/youtube-icon-svgrepo-com.svg" alt="videos"></i>
@@ -1435,10 +1421,8 @@
                     </li>
                 </ul>
             </li>
-
-            <!-- [ SCAN ] 
-                ======================================================= -->
-            <li>
+            
+            <li id="SCAN-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/fingerprint-scan-svgrepo-com.svg" alt="scan"></i>
@@ -1478,9 +1462,7 @@
                 </ul>
             </li>
 
-            <!-- [ DROP ] 
-                ======================================================= -->
-            <li>
+            <li id="DROP-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/candy-shop-svgrepo-com.svg" alt="shopify"></i>
@@ -1554,10 +1536,8 @@
                     </li>
                 </ul>
             </li>
-
-            <!-- [ SETTINGS ] 
-                =================================================== -->
-            <li>
+            
+            <li id="SETTINGS-tab">
                 <div class="icon-link">
                     <a>
                         <i><img src="assets/svg/settings-svgrepo-com.svg" alt="settings"></i>
@@ -1590,9 +1570,7 @@
                 </ul>
             </li>
 
-            <!-- [ DETAILS ] 
-                ==================================================== -->
-            <li>
+            <li id="DETAILS-tab">
                 <div class="profile-details">
                     <div class="profile-content">
                     </div>
@@ -1805,96 +1783,82 @@
         </cursoDe10Reais>
     </scaffold>
 
-    <!-- [ SCRIPTS ] 
-        ===================================================== -->
-    <scripts>
-        <script>
-            var arrow = document.querySelectorAll(".arrow");
-            for (var i = 0; i < arrow.length; i++) {
-                arrow[i].addEventListener("click", (e) => {
-                    var arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-                    arrowParent.classList.toggle("showMenu");
-                });
+    <script id="sidebar-script">
+        var arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
+                var arrowParent = e.target.parentElement.parentElement;
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+        var sidebar = document.querySelector("sidebar");
+        var sidebarBtn = document.querySelector(".switch");
+        console.log(sidebarBtn);
+        sidebarBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+            if (sidebar.classList.contains("close")) {
+                sidebar.classList.remove("blur");
+            } else {
+                sidebar.classList.add("blur");
             }
-            var sidebar = document.querySelector("sidebar");
-            var sidebarBtn = document.querySelector(".switch");
-            console.log(sidebarBtn);
-            sidebarBtn.addEventListener("click", () => {
-                sidebar.classList.toggle("close");
-                if (sidebar.classList.contains("close")) {
-                    sidebar.classList.remove("blur");
-                } else {
-                    sidebar.classList.add("blur");
-                }
-            });
-        </script>
-        <script>
-            /* Add "https://api.ipify.org?format=json" This method uses ipify.org api to get the clients IP Address. 
-                                                                                                                                                                                                                                                                                                                                                                                                                                        This method is completely free and no limitations of use. */
+        });
+    </script>
+    <script id="ipify-script">
+        $.getJSON("https://api.ipify.org?format=json",
+            function (data) {
+                $("#userip").html(data.ip);
+            })
+    </script>
+    <script id="ipinfo-script">
+        $.get( "https://ipinfo.io/json", function( response ) {
+            $( "#ip" ).html( response.ip );
+            $( "#hostname" ).html( response.hostname );
+            $( "#region" ).html( response.region );
+            $( "#loc" ).html( response.loc );
+            $( "#org" ).html(response.org );
+            $( "#postal" ).html( response.postal );
+            $( "#timezone" ).html( response.timezone );
+            $( "#city" ).html( response.city );
+            $( "#country" ).html( response.country );
+        }, "jsonp" );
 
-            $.getJSON("https://api.ipify.org?format=json",
-                function (data) {
+        /* botão liga/desliga */
+        $( function() {
+            // var geolocationPanelObserver = 0;
+            // $( ".geolocationSwitch" ).click( function() {
+            // 	switch( geolocationPanelObserver ) {
+            // 		case 0: $( "#geolocationPanel" ).hide();
+            // 				geolocationPanelObserver = 1;
+            // 		break;
+            // 		case 1: $( "#geolocationPanel" ).show();
+            // 				geolocationPanelObserver = 0;
+            // 		break;
+            // 	}
+            // } );
 
-                    // userip element is where the IP will be displayed
-                    $("#userip").html(data.ip);
-                })
-        </script>
-        <!-- [ SCRIPT DE GEOLOCALIZAÇÃO ] 
-            ==================================== -->
-        <script>
-            $.get( "https://ipinfo.io/json", function( response ) {
-                $( "#ip" ).html( response.ip );
-                $( "#hostname" ).html( response.hostname );
-                $( "#region" ).html( response.region );
-                $( "#loc" ).html( response.loc );
-                $( "#org" ).html(response.org );
-                $( "#postal" ).html( response.postal );
-                $( "#timezone" ).html( response.timezone );
-                $( "#city" ).html( response.city );
-                $( "#country" ).html( response.country );
-            }, "jsonp" );
-
-            /* botão liga/desliga */
-            $( function() {
-                // var geolocationPanelObserver = 0;
-                // $( ".geolocationSwitch" ).click( function() {
-                // 	switch( geolocationPanelObserver ) {
-                // 		case 0: $( "#geolocationPanel" ).hide();
-                // 				geolocationPanelObserver = 1;
-                // 		break;
-                // 		case 1: $( "#geolocationPanel" ).show();
-                // 				geolocationPanelObserver = 0;
-                // 		break;
-                // 	}
-                // } );
-
-                $( ".geolocationSwitch" ).click( () => {
-                    $( "#geolocationPanel" ).toggle();
-                 } );
-                $( ".geolocationSwitch" ).mousedown( () => {
-                    this.style.cursor = "grabbing" 
+            $( ".geolocationSwitch" ).click( () => {
+                $( "#geolocationPanel" ).toggle();
                 } );
-                $( ".geolocationSwitch" ).mouseup( () => {
-                    this.style.cursor = "pointer" 
-                 } );
+            $( ".geolocationSwitch" ).mousedown( () => {
+                this.style.cursor = "grabbing" 
+            } );
+            $( ".geolocationSwitch" ).mouseup( () => {
+                this.style.cursor = "pointer" 
+                } );
 
 
-            });
+        });
 
 
-        </script>
-        <script src="assets/scripts/lgn.js"></script>
-        <!-- [ DETAILS ]
-            ====================================== -->
-        <!-- <script>
-          /* just one openned at time */
-          $("details").on("click", function() {
-              $("details[open]")
-                  .not(this)
-                  .removeAttr("open");
-          });
-      </script> -->
-    </scripts>
+    </script>
+    <script src="assets/scripts/lgn.js"></script>
+    <!-- <script id="details-script">
+        $("details").on("click", function() {
+            $("details[open]")
+                .not(this)
+                .removeAttr("open");
+        });
+    </script> -->
     <script src="lnks.js"></script>
 
 </body>

@@ -117,3 +117,4 @@ large play btn
 
 
 
+https://unused-css.com/tools/clip-path-generator
