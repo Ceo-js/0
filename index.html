@@ -870,6 +870,8 @@
             color: var(--titulo);
             cursor: pointer;
         }
+
+        #amo-vc { color: #fff; font-size: 5vw; }
     </style>
 </head>
 
@@ -1709,7 +1711,7 @@
         </principal>
         <flexh>
             <card style="height:300px;">
-                <h1 id="amo-vc">amo vc ❤️</h1>
+                <h1 id="amo-vc">Amo vc ❤️</h1>
             </card>
         </flexh>
         <cursoDe10Reais>
@@ -1908,8 +1910,8 @@
         window.addEventListener( "load", ev => {
             var amoVc = document.querySelector( "#amo-vc" );
 
-            amoVc.addEventListener( "mouseover", ev => {
-                amoVc.innerHTML = "❤️   Lýh   ❤️";
+            amoVc.addEventListener( "mouseenter", ev => {
+                amoVc.innerHTML = "<lyh style='color: #f09;'>❤️   Lýh   ❤️</lyh>";
             } );
             amoVc.addEventListener( "mouseleave", ev => {
                 amoVc.innerHTML = "Amo vc ❤️";
