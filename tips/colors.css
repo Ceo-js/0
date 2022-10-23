@@ -91,8 +91,8 @@ operaGX {
     /* --operaGX-gradient-3: #; */
 }
 gamevicio {
-    --gamevicio-dark:      rgb(26, 28, 29);
-    --gamevicio-borderRed: rgb(151, 22, 19);
+    --gamevicio-dark:      #1a1c1d;
+    --gamevicio-borderRed: #971613;
 }
 var {
     --var-1: #55dae1;
