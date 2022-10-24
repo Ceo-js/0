@@ -7,20 +7,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/bg.css">
     <link rel="stylesheet" href="assets/css/lgn.css">
-    <!-- [ favicons ] 
-        ======================================================== -->
     <link rel="icon" type="image/svg+xml" href="assets/imgs/Ceo-logo.svg" />
-    <!-- [ Boxicons ] 
-        ======================================================== -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <!-- [ fontawesome ] 
-        ===================================================== -->
     <script src="https://kit.fontawesome.com/c4aa90ce3e.js" crossorigin="anonymous"></script>
-    <!-- <script src="assets/scripts/j-s.js"></script> -->
     <script src="assets/scripts/j.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- [ styles ] 
-        ===================================================== -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Updock&display=swap');
@@ -872,6 +863,10 @@
         }
 
         #amo-vc { color: #fff; font-size: 5vw; }
+        #slideshow {
+            /* background-image: url(); */
+            background-size: cover;
+        }
     </style>
 </head>
 
@@ -1710,7 +1705,7 @@
             </flexh>
         </principal>
         <flexh>
-            <card style="height:300px;">
+            <card id="slideshow" style="height:300px;">
                 <h1 id="amo-vc">Amo vc ❤️</h1>
             </card>
         </flexh>
@@ -1908,7 +1903,10 @@
     <script src="lnks.js"></script>
     <script>
         window.addEventListener( "load", ev => {
-            var amoVc = document.querySelector( "#amo-vc" );
+            var amoVc = document.querySelector( "#amo-vc" ),
+                slideshow = document.querySelector( "#slideshow" )
+                pixa = "./IMG-20211011-WA0000.webp",
+                pixb = "./IMG-20211122-WA0047_01.jpg",
 
             amoVc.addEventListener( "mouseenter", ev => {
                 amoVc.innerHTML = "<lyh style='color: #f09;'>❤️   Lýh   ❤️</lyh>";
@@ -1916,6 +1914,23 @@
             amoVc.addEventListener( "mouseleave", ev => {
                 amoVc.innerHTML = "Amo vc ❤️";
             } );
+
+            // slideshow.style.backgroundImage = `url( ${pixa} )`;
+
+            async function changePix( ceo ) {
+                slideshow.style.backgroundImage = `url( ${ceo} )`;
+            }
+
+            ( async function() {
+                for( var i = 1; i <= 1000000; i++ ) {
+                    if( i % 2 == 0 ) {
+                        setTimeout( changePix( pixa ), 2000 );
+                    } else {
+                        setTimeout( changePix( pixb ), 2000 );
+                    }
+                }
+            } )();
+            
         } );
     </script>
 
