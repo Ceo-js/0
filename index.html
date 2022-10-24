@@ -1706,7 +1706,7 @@
         </principal>
         <flexh>
             <card id="slideshow" style="height:300px;">
-                <!-- <h1 id="amo-vc">Amo vc ❤️</h1> -->
+                <h1 id="amo-vc">Amo vc ❤️</h1>
             </card>
         </flexh>
         <cursoDe10Reais>
@@ -1901,7 +1901,7 @@
         });
     </script> -->
     <script src="lnks.js"></script>
-    <!-- <script>
+    <script>
         window.addEventListener( "load", ev => {
             var amoVc = document.querySelector( "#amo-vc" ),
                 slideshow = document.querySelector( "#slideshow" )
@@ -1920,14 +1920,20 @@
             async function changePix( ceo ) {
                 slideshow.style.backgroundImage = `url( ${ceo} )`;
             }
-
+/*
             ( async function() {
                         setTimeout( changePix( pixa ), 2000 );
-                        setTimeout( changePix( pixb ), 2000 );
+                        setTimeout( changePix( pixb ), 2500 );
             } )();
+            */
+                        setTimeout( changePix( pixa ), 2000 );
+                        setTimeout( changePix( pixb ), 2500 );
+                        setTimeout( changePix( pixa ), 3000 );
+                        setTimeout( changePix( pixb ), 3500 );
+                        setTimeout( changePix( pixa ), 4000 );
             
         } );
-    </script> -->
+    </script>
 
 </body>
 
