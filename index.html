@@ -1917,20 +1917,41 @@
 
             // slideshow.style.backgroundImage = `url( ${pixa} )`;
 
-            async function changePix( ceo ) {
-                slideshow.style.backgroundImage = `url( ${ceo} )`;
+            function pix1( ceo, lyh, b, d ) {
+                setTimeout( () => {
+                	slideshow.style.backgroundImage = `url( ${ceo} )`;
+                	lyh( b );
+                }, d );
             }
-/*
-            ( async function() {
-                        setTimeout( changePix( pixa ), 2000 );
-                        setTimeout( changePix( pixb ), 2500 );
-            } )();
-            */
-                        setTimeout( changePix( pixa ), 2000 );
-                        setTimeout( changePix( pixb ), 2500 );
-                        setTimeout( changePix( pixa ), 3000 );
-                        setTimeout( changePix( pixb ), 3500 );
-                        setTimeout( changePix( pixa ), 4000 );
+            function pix2( ceo, lyh, b, d ) {
+                setTimeout( () => {
+                	slideshow.style.backgroundImage = `url( ${ceo} )`;
+                	lyh( b );
+                }, d );
+            }
+            
+            pix1( pixa, pix2, pixb, 2000 );
+            pix1( pixb, pix2, pixa, 5000 );
+            pix1( pixa, pix2, pixb, 8000 );
+            pix1( pixb, pix2, pixa, 12000 );
+            pix1( pixa, pix2, pixb, 14000 );
+            pix1( pixb, pix2, pixa, 17000 );
+            pix1( pixa, pix2, pixb, 20000 );
+            pix1( pixb, pix2, pixa, 25000 );
+            pix1( pixa, pix2, pixb, 29000 );
+            pix1( pixb, pix2, pixa, 33000 );
+                        
+                        /*
+                        function print_two( v ){
+							setTimeout( () => {
+								alert(2);
+								v();
+							}, 2000);
+						};
+					    
+						alert("1");
+						print_two( () => alert( 3 ) );
+						*/
             
         } );
     </script>
