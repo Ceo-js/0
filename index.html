@@ -1905,8 +1905,8 @@
         window.addEventListener( "load", ev => {
             var amoVc = document.querySelector( "#amo-vc" ),
                 slideshow = document.querySelector( "#slideshow" )
-                pixa = "./IMG-20211011-WA0000.webp",
-                pixb = "./IMG-20211122-WA0047_01.jpg",
+                pixa = "IMG-20211011-WA0000.webp",
+                pixb = "IMG-20211122-WA0047_01.jpg",
 
             amoVc.addEventListener( "mouseenter", ev => {
                 amoVc.innerHTML = "<lyh style='color: #f09;'>❤️   Lýh   ❤️</lyh>";
@@ -1915,34 +1915,25 @@
                 amoVc.innerHTML = "Amo vc ❤️";
             } );
 
-            // slideshow.style.backgroundImage = `url( ${pixa} )`;
-
-            function pix1( ceo, lyh, b, d ) {
+            function pix1( f, a, b ,t ) {
                 setTimeout( () => {
-                	slideshow.style.backgroundImage = `url( ${ceo} )`;
-                	lyh( b );
-                }, d );
+                	slideshow.style.backgroundImage = `url( ${a} )`;
+                	f( b, (t * 2) );
+                }, t );
             }
-            function pix2( ceo, lyh, b, d ) {
+            function pix2( a, t ) {
                 setTimeout( () => {
-                	slideshow.style.backgroundImage = `url( ${ceo} )`;
-                	lyh( b );
-                }, d );
+                	slideshow.style.backgroundImage = `url( ${a} )`;
+                	/*f( b );*/
+                }, t );
             }
             
-            pix1( pixa, pix2, pixb, 2000 );
-            pix1( pixb, pix2, pixa, 5000 );
-            pix1( pixa, pix2, pixb, 8000 );
-            pix1( pixb, pix2, pixa, 12000 );
-            pix1( pixa, pix2, pixb, 14000 );
-            pix1( pixb, pix2, pixa, 17000 );
-            pix1( pixa, pix2, pixb, 20000 );
-            pix1( pixb, pix2, pixa, 25000 );
-            pix1( pixa, pix2, pixb, 29000 );
-            pix1( pixb, pix2, pixa, 33000 );
-                        
+            for( i = 1; i <= 1000; i++ ) {
+            	pix1( pix2, pixa, pixb, ( i * 1000 ) );
+            }
+
                         /*
-                        function print_two( v ){
+                        function f2( v ){
 							setTimeout( () => {
 								alert(2);
 								v();
@@ -1950,7 +1941,7 @@
 						};
 					    
 						alert("1");
-						print_two( () => alert( 3 ) );
+						f2( () => alert( 3 ) );
 						*/
             
         } );
