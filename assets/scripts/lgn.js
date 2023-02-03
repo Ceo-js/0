@@ -55,7 +55,7 @@ function closeForm() {
 	document.getElementById( "scaffold" ).style.display = "none";
 }
         
-const telefone = document.getElementById( "telefone" ); // Seletor do campo de telefone
+const telefone = document.querySelector( "#telefone" ); // Seletor do campo de telefone
         
 telefone.addEventListener( "keypress", ( el ) => mask( el.target.value ) ); // Dispara quando digitado no campo
 telefone.addEventListener( "change", ( el ) => mask( el.target.value ) ); // Dispara quando autocompletado o campo
