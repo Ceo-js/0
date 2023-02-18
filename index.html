@@ -131,52 +131,76 @@
         flexh {
             display: flex;
             width: 100%;
-            justify-content: space-around;
-            /* background: rgb(0 174 0); */
+        }
+
+        panel[top] {
+            display: grid;
+            grid-template-columns: repeat( auto-fit, minmax( 300px, 1fr ) );
+            justify-content: center;
+            gap: 0 2vw;
+            width: clamp( 100px, 100%, 1200px );
+            margin: 2vw auto;
         }
 
         card {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--color01);
-            border-radius: 24px;
-            margin: 8px;
-            padding: 5px;
-            min-width: 306px;
+	        background-size: 400% 400%;
+            background-image: linear-gradient(
+                45deg,
+                #905 33%, #ffab00
+            );
+            border-radius: 1rem;
+            padding: 4px;
             width: 100%;
-            width: clamp(306px, 100%, 100%);
-            min-height: 300px;
-            transition: .7s cubic-bezier(0.65, 0.05, 0.36, 1);
-            /* max-width: 500px; */
+            height: 100%;
+            clip-path: polygon(
+                0% 33px, 33px 0%, 
+                100% 0%, 100% calc( 100% - 33px ), 
+                calc( 100% - 33px ) 100%, 0% 100%
+            );
+            overflow: hidden;
+            /* transition: .7s cubic-bezier(0.65, 0.05, 0.36, 1); */
+            transition: .3s;
         } card:hover {
-            /* box-shadow: rgb(17 19 19 / 90%) 0px 4px 12px; */
-            /* transition: .3s cubic-bezier(0.6, -0.28, 0.74, 0.05); */
+            animation: animatedLinear 2s ease infinite;
             transition: all .2s ease-in-out;
-            /* transform: translateY(-5px) scale(1.005) translateZ(0); */
         }
 
         principal flexh card {
             background: transparent;
-            /* clip-path: polygon(0% 10%, 10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%); */
         } principal flexh card:hover {
             filter: drop-shadow(#f0a 0 0 15px);
         }
-        card card-spot {
+        card-spot {
             display: flex;
             justify-content: center;
             align-items: center;
             background: var(--color01);
-            box-shadow: inset var(--color03) 0 0 0 2px;
-            border-radius: 6px;
+            border-radius: 1rem;
             padding: 5px;
-            min-width: 306px;
             width: 100%;
-            width: clamp(306px, 100%, 100%);
-            min-height: 300px;
+            height: 100%;
             transition: .7s cubic-bezier(0.65, 0.05, 0.36, 1);
-            clip-path: polygon(0% 10%, 10% 0%, 100% 0%, 100% 90%, 90% 100%, 0% 100%);
+            clip-path: polygon(
+                0% 33px, 33px 0%, 
+                100% 0%, 100% calc( 100% - 33px ), 
+                calc( 100% - 33px ) 100%, 0% 100%
+            );
         } 
+
+        @keyframes animatedLinear {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
         .search {
             min-height: 44px;
@@ -1642,7 +1666,7 @@
             </flexh>
         </barraDePesquisa>
         <principal>
-            <flexh>
+            <panel top>
                 <card>
                     <card-spot>
                         <!-- [ SHOW IP ]
@@ -1702,7 +1726,7 @@
                         </center> -->
                     </card-spot>
                 </card>
-            </flexh>
+            </panel>
         </principal>
         <flexh>
             <card id="slideshow" style="height:300px;">
