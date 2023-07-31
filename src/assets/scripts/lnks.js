@@ -2,19 +2,18 @@
 
 window.addEventListener( "load", ev => {
 
-    /* [ properties ] 
-    ==========================================*/
-    var lnk = document.querySelectorAll( "lnk" ),
-        sHdlLnk = document.querySelectorAll( "sHdl-lnk" ),
-        lnkH = document.querySelectorAll( ".lnkH" ),
-        perfil = document.querySelector( "#perfil" ),
-        ip = document.querySelector( "#ip" ),
-        ipAtual = document.querySelector( "#ipAtual" ),
-        ipAntigo = document.querySelector( "#ipAntigo" ),
-        ipNovo = document.querySelector( "#ipNovo" );
+    /* == [ properties ] == == == == == == == == == */
+    var 
+      lnk = document.querySelectorAll( "lnk" ),
+      sHdlLnk = document.querySelectorAll( "sHdl-lnk" ),
+      lnkH = document.querySelectorAll( ".lnkH" ),
+      perfil = document.querySelector( "#perfil" ),
+      ip = document.querySelector( "#ip" ),
+      ipAtual = document.querySelector( "#ipAtual" ),
+      ipAntigo = document.querySelector( "#ipAntigo" ),
+      ipNovo = document.querySelector( "#ipNovo" );
 
-    /* [ events ] 
-    ==========================================*/
+    /* == [ events ]  == == == == == == == == == */
     lnk.forEach( l => {
         l.addEventListener( "click", ev => {
             if( l.getAttribute( "ceo" ) ) {
